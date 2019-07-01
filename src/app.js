@@ -35,6 +35,7 @@ const order = document.getElementById('order');
     <p>${appfood.contact.phone}</p>
     <p>${appfood.contact.email}</p>
     <a href=${appfood.contact.site} target="_blank">${appfood.contact.site}</a>
+    <br></br>
     </div>
     `;
     dataView.insertAdjacentHTML("beforeend", namePlaceFood);
