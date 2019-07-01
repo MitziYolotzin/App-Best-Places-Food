@@ -1,32 +1,68 @@
 
-/*
-//test req 
-const http = new XMLHttpRequest()
 
-http.open("GET", "https://app-food-83580.firebaseio.com/appfood.json")
-http.send()
+//
+  
+const dataView  = document.getElementById('places-data');
+const searchName = document.getElementById('search-name');
+const order = document.getElementById('order');
 
-http.onload = () => console.log(http.responseText)
-*/
+//
 
+    fetch('https://app-food-83580.firebaseio.com/appfood.json')
+    .then(response => response.json())
+    .then(dataRestaurant => {
+        console.log(dataRestaurant)
+      localStorage.dataRestaurant = JSON.stringify(dataRestaurant.appfood);
+     showList(dataRestaurant);
+      //return dataRestaurant
+    });
+  
+ 
+  
+  //Print the data
+  const printPlacesFood = (appfood) => {
+    let namePlaceFood = `
+    <div id="restaurant-info">
+    <h3>Restaurant</h3>
+    <h3></h3>
+    <p>${appfood.name}</p>
+    <h3>Rating</h3>
+    <p>${appfood.rating}</p>
+    <h3>Address</h3>
+    <p>${appfood.address.street}</p>
+    <p> ${appfood.address.city}, ${appfood.address.state}</p>
+    <h3>Contact</h3>
+    <p>${appfood.contact.phone}</p>
+    <p>${appfood.contact.email}</p>
+    <a href=${appfood.contact.site} target="_blank">${appfood.contact.site}</a>
+    </div>
+    `;
+    dataView.insertAdjacentHTML("beforeend", namePlaceFood);
+  };
+ 
+  //Show List Data
+  const showList = (dataPlaceList) => {
+    dataView.innerHTML = "";
+    dataPlaceList.forEach(element => {
+      printPlacesFood(element);
+    });
+  };
 
+  //Filter coincidence 
+const filterCoincidence = () => {
+    searchName.addEventListener('keyup', () => {
+      let searchValue = document.getElementById('search-name').value;
+      showList(window.data.filterByLetter(JSON.parse(localStorage.dataRestaurant), searchValue));
+    });
+  }
+  
 
-//funcion req
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://app-food-83580.firebaseio.com/appfood.json', true);
-
-// If specified, responseType must be empty string or "text"
-xhr.responseType = 'text';
-
-xhr.onload = function () {
-    if (xhr.readyState === xhr.DONE) {
-        if (xhr.status === 200) {
-            console.log(xhr.response);
-            //console.log(xhr.responseText);
-        }
-    }
-};
-
-xhr.send(null);
-
-
+  const getOrderPlace = () => {
+   
+      order.addEventListener("click", (event) => {
+        
+        showList(window.data.sortData(JSON.parse(localStorage.getItem("dataRestaurant")), event.target.name));
+      });
+    
+  }
+  getOrderPlace()
