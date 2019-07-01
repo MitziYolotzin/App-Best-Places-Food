@@ -23,18 +23,22 @@ const order = document.getElementById('order');
   const printPlacesFood = (appfood) => {
     let namePlaceFood = `
     <div id="restaurant-info">
-    <h3>Restaurant</h3>
-    <h3></h3>
+    <i class="fas fa-utensils"></i><h3>Restaurant</h3> 
     <p>${appfood.name}</p>
+    <i class="fas fa-star"></i>
     <h3>Rating</h3>
     <p>${appfood.rating}</p>
+    <i class="fas fa-map-marker-alt"></i>
     <h3>Address</h3>
     <p>${appfood.address.street}</p>
     <p> ${appfood.address.city}, ${appfood.address.state}</p>
     <h3>Contact</h3>
+    <i class="fas fa-mobile-alt"></i>
     <p>${appfood.contact.phone}</p>
+    <i class="fas fa-at"></i>
     <p>${appfood.contact.email}</p>
     <a href=${appfood.contact.site} target="_blank">${appfood.contact.site}</a>
+    <br></br>
     <br></br>
     </div>
     `;
