@@ -6,34 +6,34 @@ const order = document.getElementById("order");
 
 //
 
-fetch("https://app-food-83580.firebaseio.com/appfood.json")
+fetch("https://s3-us-west-2.amazonaws.com/lgoveabucket/data_melp.json")
   .then(response => response.json())
   .then(dataRestaurant => {
     console.log(dataRestaurant);
-    localStorage.dataRestaurant = JSON.stringify(dataRestaurant.appfood);
+    localStorage.dataRestaurant = JSON.stringify(dataRestaurant.data_melp);
     showList(dataRestaurant);
     //return dataRestaurant
   });
 
 //Print the data
-const printPlacesFood = appfood => {
+const printPlacesFood = data_melp => {
   let namePlaceFood = `
     <div id="restaurant-info">
     <i class="fas fa-utensils"></i><h3>Restaurant</h3> 
-    <p>${appfood.name}</p>
+    <p>${data_melp.name}</p>
     <i class="fas fa-star"></i>
     <h3>Rating</h3>
-    <p>${appfood.rating}</p>
+    <p>${data_melp.rating}</p>
     <i class="fas fa-map-marker-alt"></i>
     <h3>Address</h3>
-    <p>${appfood.address.street}</p>
-    <p> ${appfood.address.city}, ${appfood.address.state}</p>
+    <p>${data_melp.address.street}</p>
+    <p> ${data_melp.address.city}, ${data_melp.address.state}</p>
     <h3>Contact</h3>
     <i class="fas fa-mobile-alt"></i>
-    <p>${appfood.contact.phone}</p>
+    <p>${data_melp.contact.phone}</p>
     <i class="fas fa-at"></i>
-    <p>${appfood.contact.email}</p>
-    <a href=${appfood.contact.site} target="_blank">${appfood.contact.site}</a>
+    <p>${data_melp.contact.email}</p>
+    <a href=${data_melp.contact.site} target="_blank">${data_melp.contact.site}</a>
     <br></br>
     <br></br>
     </div>
